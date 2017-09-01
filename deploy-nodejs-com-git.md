@@ -91,14 +91,8 @@ Neste tutorial, esta será a estrutura de pastas:
     producao/
 ```
 
-Na pasta `aplicacao.git` ficará armazenada o repositório, 
+Na pasta `aplicacao.git` ficarão armazenados dados do repositório, 
 na `produção` ficará armazenada os arquivos do projeto.
-
-Para criar execute:
-
-```bash
-$ mkdir -p ~/aplicacao/{aplicacao.git,producao}
-```
 
 ## Criando um repositório bare
 
@@ -118,6 +112,12 @@ Iniciamos um repositório bare na pasta `aplicacao.git/`.
 
 ```bash
 $ git init aplicacao.git --bare
+```
+
+Após a pasta do repositório ser criada, criamos a pasta `producao`.
+
+```bash
+$ mkdir -p producao
 ```
 
 ## Criando um Hook
