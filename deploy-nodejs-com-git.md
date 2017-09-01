@@ -163,7 +163,7 @@ Se tudo ocorrer bem, serão instalados os módulos e o pm2 (re)iniciará sua apl
 
 No seu servidor, execute:
 
-````bash
+```bash
 sudo pm2 save
 ```
 
