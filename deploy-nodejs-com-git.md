@@ -15,7 +15,7 @@ Neste caso irei chamar de `git` mas fique à vontade para escolher o nome.
 Este usuário pertencerá ao grupo sudo.
 
 ```bash
-$ sudo adduser -m git -aG sudo
+$ sudo useradd git -mG sudo
 ```
 
 Para maior segurança, é recomendado definirmos uma senha para o usuário `git`.
@@ -30,16 +30,22 @@ Faça Login:
 $ sudo su - git
 ```
 
-## Criando uma chave SSH
-
-No seu servidor, crie a pasta .ssh na pasta do usuário `git`.
+Altere as permissões da pasta home do usuário `git`.
 
 ```bash
-$ mkdir -p /home/git/.ssh
+$ sudo chmod 770 -R /home/git/
 ```
 
-Na sua máquina local, crie uma chave SSH para poder ter acesso ao usuário `git`, 
-se você já possui uma chave SSH, pode pular este comando.
+Crie a pasta `.ssh`:
+
+```bash
+$ mkdir -p .ssh
+```
+
+## Criando uma chave SSH
+
+Na sua máquina local, crie uma chave SSH para ter acesso ao usuário `git`, 
+se você já possui, você deve pular este comando.
 
 ```bash
 $ ssh-keygen -t rsa
@@ -49,25 +55,27 @@ Adicione sua chave pública às chaves autorizadas do usuário `git` na VPS.
 Execute na sua máquina local:
 
 ```bash
-$ cat ~/.ssh/id_rsa.pub | ssh USUARIO@HOST_DA_VPS "sudo cat >> /home/git/.ssh/authorized_keys"
+$ cat ~/.ssh/id_rsa.pub | ssh root@HOST_DA_VPS "cat > /home/git/.ssh/authorized_keys"
 ```
 
-Tente conectar-se com o usuário git:
+> Se não tiver acesso ao usuário root de seu servidor, você pode copiar manualmente o conteúdo do arquivo `~/.ssh/id_rsa.pub` de sua máquina local, criar o arquivo `/home/git/.ssh/authorized_keys` no servidor, colar e salvar.
+
+Tente conectar-se ao SSH com o usuário git:
 
 ```bash
 ssh git@HOST
 ```
 
-Se conseguir logar, você está pronto para prosseguir. Se você não conseguir,
-verifique se você seguiu os passos corretamente.
+Se conseguir logar, você está pronto para prosseguir. 
+Se não conseguir, tente refazer os passos anteriores.
 
-## Instalando o PM2
+## Instalando o PM2 no servidor
 
 O PM2 é um módulo javascript que permite 
 a execução de aplicações NodeJS em segundo plano. 
 Com ela é possível iniciar sua aplicação após o Boot da VPS.
 
-Para instalar, execute no seu server:
+Para instalar, execute no seu servidor:
 
 ```bash
 $ sudo npm install -g pm2
