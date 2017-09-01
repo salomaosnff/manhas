@@ -3,9 +3,9 @@
 > Neste tutorial você irá aprender como automatizar o deploy de suas aplicações NodeJS utilizando o git
 
 ## Requerimentos:
-- Uma VPS com acesso SSH
-- Git instalado na VPS e na máquina Local
-- NodeJS na VPS e na máquina Local
+- Um servidor com acesso SSH
+- Git instalado no servidor e na máquina Local
+- NodeJS no servidor e na máquina Local
 - Conhecimentos básicos de git e shellscript
 
 ## Criando um usuário
@@ -51,11 +51,11 @@ se você já possui, você deve pular este comando.
 $ ssh-keygen -t rsa
 ```
 
-Adicione sua chave pública às chaves autorizadas do usuário `git` na VPS.
+Adicione sua chave pública às chaves autorizadas do usuário `git` no servidor.
 Execute na sua máquina local:
 
 ```bash
-$ cat ~/.ssh/id_rsa.pub | ssh root@HOST_DA_VPS "cat > /home/git/.ssh/authorized_keys"
+$ cat ~/.ssh/id_rsa.pub | ssh root@HOST "cat > /home/git/.ssh/authorized_keys"
 ```
 
 > Se não tiver acesso ao usuário root de seu servidor, você pode copiar manualmente o conteúdo do arquivo `~/.ssh/id_rsa.pub` de sua máquina local, criar o arquivo `/home/git/.ssh/authorized_keys` no servidor, colar e salvar.
@@ -73,7 +73,7 @@ Se não conseguir, tente refazer os passos anteriores.
 
 O PM2 é um módulo javascript que permite 
 a execução de aplicações NodeJS em segundo plano. 
-Com ela é possível iniciar sua aplicação após o Boot da VPS.
+Com ela é possível iniciar sua aplicação após o Boot do servidor.
 
 Para instalar, execute no seu servidor:
 
@@ -95,7 +95,7 @@ na `produção` ficará armazenada os arquivos do projeto.
 
 ## Criando um repositório bare
 
-Para enviar atualizações para o servidor de produção(VPS),
+Para enviar atualizações para o servidor de produção(servidor),
 é necessário criarmos um repositório bare, que nada mais é 
 que um repositório que fica do lado do servidor.
 
@@ -169,7 +169,7 @@ $ sudo chmod +x aplicacao.git/hooks/post-receive
 Na pasta de seu projeto, execute:
 
 ```bash
-$ git remote add deploy git@<SUA_VPS>:aplicacao/aplicacao.git
+$ git remote add deploy git@HOST:aplicacao/aplicacao.git
 ```
 
 ## Arquivo de inicialização do PM2
@@ -191,7 +191,7 @@ $ git add -A
 $ git commit -m "Deploy com Git Hooks"
 ```
 
-E envie para sua VPS executando:
+E envie para sua servidor executando:
 
 ```bash
 $ git push deploy master
