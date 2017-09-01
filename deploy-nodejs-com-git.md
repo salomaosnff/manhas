@@ -10,7 +10,7 @@
 
 ## Criando um usuário
 
-Primeiramente, iremos criar um usuário no servidor para fazer o deploy.
+Primeiramente, iremos criar um usuário no servidor que será responsável por fazer o deploy.
 Neste caso irei chamar de `git` mas fique à vontade para escolher o nome.
 Este usuário pertencerá ao grupo sudo.
 
