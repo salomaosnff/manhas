@@ -193,7 +193,7 @@ $ git commit -m "Deploy com Git Hooks"
 E envie para sua VPS executando:
 
 ```bash
-$ git push deploy
+$ git push deploy master
 ```
 
 Se tudo ocorrer bem, serão instalados os módulos e o pm2 (re)iniciará sua aplicação.
