@@ -85,10 +85,9 @@ $ sudo npm install -g pm2
 
 Neste tutorial, esta será a estrutura de pastas:
 ```
-/home/git/
-  aplicacao/
-    aplicacao.git/
-    producao/
+aplicacao
+├── aplicacao.git
+└── producao
 ```
 
 Na pasta `aplicacao.git` ficarão armazenados dados do repositório, 
