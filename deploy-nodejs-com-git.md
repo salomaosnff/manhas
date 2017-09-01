@@ -139,7 +139,7 @@ GIT_WORK_TREE=/home/git/aplicacao/producao
 echo "--> Fazendo checkout...";
 GIT_WORK_TREE=$APP_DIR git checkout -f;
 
-cd $APP_DIR;
+cd $GIT_WORK_TREE;
 
 echo "--> Instalando dependências...";
 
