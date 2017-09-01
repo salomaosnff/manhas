@@ -30,13 +30,44 @@ Faça Login:
 $ sudo su - git
 ```
 
+## Criando uma chave SSH
+
+No seu servidor, crie a pasta .ssh na pasta do usuário `git`.
+
+```bash
+$ mkdir -p /home/git/.ssh
+```
+
+Na sua máquina local, crie uma chave SSH para poder ter acesso ao usuário `git`, 
+se você já possui uma chave SSH, pode pular este comando.
+
+```bash
+$ ssh-keygen -t rsa
+```
+
+Adicione sua chave pública às chaves autorizadas do usuário `git` na VPS.
+Execute na sua máquina local:
+
+```bash
+$ cat ~/.ssh/id_rsa.pub | ssh USUARIO@HOST_DA_VPS "cat >> /home/git/.ssh/authorized_keys"
+```
+
+Tente conectar-se com o usuário git:
+
+```bash
+ssh git@HOST
+```
+
+Se conseguir logar, você está pronto para prosseguir. Se você não conseguir,
+verifique se você seguiu os passos corretamente.
+
 ## Instalando o PM2
 
 O PM2 é um módulo javascript que permite 
 a execução de aplicações NodeJS em segundo plano. 
 Com ela é possível iniciar sua aplicação após o Boot da VPS.
 
-Para instalar, execute:
+Para instalar, execute no seu server:
 
 ```bash
 $ sudo npm install -g pm2
