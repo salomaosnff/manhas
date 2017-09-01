@@ -133,11 +133,11 @@ Ele será executado toda vez que o reposítório receber atualizações.
 Utilizando um editor de sua preferência, crie o arquivo `aplicacao.git/hooks/post-receive` contendo:
 
 ```shellscript
-# Define a pasta de destino dos arquivos
-GIT_WORK_TREE=/home/git/aplicacao/producao
+echo "--------------------------------------------------------"
+export GIT_WORK_TREE=/home/git/aplicacao/producao
 
 echo "--> Fazendo checkout...";
-GIT_WORK_TREE=$APP_DIR git checkout -f;
+git checkout -f;
 
 cd $GIT_WORK_TREE;
 
@@ -147,14 +147,16 @@ echo "--> Instalando dependências...";
 rm -rf node_modules/;
 
 # Instala somente módulos de produção
-npm install --only=production
+npm install --only=production > npm.log
 
 echo "--> Iniciando aplicação...";
 
 # Inicia ou reinicia a aplicação
-PORT=8000 pm2 startOrRestart app.yml
+PORT=8000 pm2 startOrRestart app.yml > /dev/null
 
 echo "--> Deploy efetuado com sucesso!"
+echo "--> Log do NPM disponível em npm.log."
+echo "--------------------------------------------------------"
 ```
 
 Dê permissão de execução ao script:
