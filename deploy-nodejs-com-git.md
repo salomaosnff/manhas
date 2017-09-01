@@ -49,7 +49,7 @@ Adicione sua chave pública às chaves autorizadas do usuário `git` na VPS.
 Execute na sua máquina local:
 
 ```bash
-$ cat ~/.ssh/id_rsa.pub | ssh USUARIO@HOST_DA_VPS "cat >> /home/git/.ssh/authorized_keys"
+$ cat ~/.ssh/id_rsa.pub | ssh USUARIO@HOST_DA_VPS "sudo cat >> /home/git/.ssh/authorized_keys"
 ```
 
 Tente conectar-se com o usuário git:
